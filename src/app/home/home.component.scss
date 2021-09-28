@@ -1,0 +1,36 @@
+#homeNav {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    background-color: black;
+    transition: 0.4s;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 99;
+    a {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 3rem;
+        color: white;
+        font-weight: 900;
+        text-decoration: none;
+        text-align: center;
+        padding: 1rem;
+        line-height: 4rem;
+        float: left;
+    }
+    a:hover, a.active {
+        background-color: white;
+        color: black;
+    }
+}
+.homeContainer #edde{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    img {
+        width: 50%;
+        border: 1px solid black;
+    }
+}

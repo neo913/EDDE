@@ -1,1 +1,19 @@
-<p>home works!</p>
+<nav id="homeNav">
+    <a [hidden]="getTag() == '' || getTag() == 'edde'" href="#edde" id="logo">EDDE</a>
+    <div [hidden]="true" id="navbar-center"><!--[hidden]="when scroll is top"-->
+        <a [ngClass]="{'active': getTag()=='about'}" href="#about">About</a>
+        <a [ngClass]="{'active': getTag()=='contact'}" href="#contact">Contact</a>
+        
+    </div>
+</nav>
+<div class="homeContainer">
+    <div id="edde">
+        <img src="../../assets/EDDE.jpg">
+    </div>
+    <div id="about">
+        About me...
+    </div>
+    <div id="contact">
+        How to contact me
+    </div>
+</div>
