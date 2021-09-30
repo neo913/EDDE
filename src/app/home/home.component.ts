@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { aboutText } from '../../assets/library';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
+  aboutText = aboutText;
   constructor(private router: Router) { }
 
   ngOnInit(): void {
@@ -17,6 +19,5 @@ export class HomeComponent implements OnInit {
     let url = this.router.url;
     let urlArr = url.split('#');
     return urlArr[1]? urlArr[1]: '';
-    
   }
 }
