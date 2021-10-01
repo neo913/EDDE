@@ -1,8 +1,9 @@
+@import '../../library.scss';
 #homeNav {
 	display: flex;
 	justify-content: center;
 	overflow: hidden;
-	background-color: black;
+	background-color: rgba(0,0,0,0.5);
 	transition: 0.4s;
 	position: fixed;
 	width: 100%;
@@ -31,22 +32,33 @@
 		justify-content: center;
 		align-items: center;
 	}
-	& #edde {
+	& #home {
+		flex-direction: column;
+		background-color: $color1;
+		.intro {
+			width: 70%;
+			margin-top: 5%;
+		}
 		img {
-			width: 50%;
-			border: 1px solid black;
+			width: 300px;
+			box-shadow: 0px 0px 1rem 0px;
+			border-radius: 100%;
 		}
 	}
 	& #about {
-		background-color: #009688;
+		background-color: $color2;
 		.aboutMe {
 			width: 70%;
 		}
 	}
 	& #contact {
-		background-color: #FFA000;
+		background-color: $color3;
 		.contactBox {
 			width: 50%;
 		}
+	}
+	
+	& #extra {
+		background-color: $color4;
 	}
 }
