@@ -25,7 +25,10 @@ export class HomeComponent implements OnInit {
     return urlArr[1]? urlArr[1]: '';
   }
 
-  /* Scroll to specific element */
+  /**
+   * 
+
+  // Scroll to specific element
   scrollTo(direction: string) {
     console.log(direction);
     let target = '';
@@ -94,5 +97,5 @@ export class HomeComponent implements OnInit {
     this.scrolledTime = Date.now();
     this.wakeUpTime = this.scrolledTime + 3000;
   }
-  
+  */
 }
