@@ -35,14 +35,17 @@
 	& #home {
 		flex-direction: column;
 		background-color: $color1;
-		.intro {
-			width: 70%;
-			margin-top: 5%;
-		}
 		img {
 			width: 300px;
 			box-shadow: 0px 0px 1rem 0px;
 			border-radius: 100%;
+		}
+		.home {
+			width: 70%;
+			margin-top: 5%;
+		}
+		button {
+			font-size: 1.3rem;
 		}
 	}
 	& #about {
