@@ -1,25 +1,29 @@
 <nav id="homeNav">
-	<a [hidden]="getTag() == '' || getTag() == 'home'" href="#edde" id="logo">EDDE</a>
-	<div [hidden]="false" id="navbar-center"><!--[hidden]="when scroll is top"-->
+	<a href="#edde" id="logo">EDDE</a>
+	<div id="navbar-center">
 		<a [ngClass]="{'active': getTag()=='about'}" href="#about">About</a>
+		<a [ngClass]="{'active': getTag()=='skills'}" href="#skills">Skills</a>
+		<a [ngClass]="{'active': getTag()=='work'}" href="#work">Work</a>
 		<a [ngClass]="{'active': getTag()=='contact'}" href="#contact">Contact</a>
 	</div>
 </nav>
 <div class="homeContainer">
 	<div id="home">
 		<img src="../../assets/edward.jpg">
-		<div class="home" [innerHTML]="aboutText"></div>
+		<div class="home box" [innerHTML]="aboutText"></div>
 		<button mat-raised-button>Contact</button>
 	</div>
 	<div id="about">
-		<div class="aboutMe" [innerHTML]="aboutText"></div>
+		<div class="about box" [innerHTML]="aboutText"></div>
 	</div>
-	<div id="contact">
-		<div class="contactBox">
+	<div id="skills">
+		<div class="skills box">
 
 		</div>
 	</div>
-	<div id="extra">
+	<div id="work">
+		<div class="work box">
 
+		</div>
 	</div>
 </div>

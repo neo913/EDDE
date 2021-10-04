@@ -6,8 +6,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 span.whitening {
   color: white;
 }
-h1.font-900 {
-  font-weight: 900;
+.font-900 {
+  font-weight: 900 !important;
 }
 .text-center {
   text-align: center;
@@ -17,4 +17,8 @@ h1.font-900 {
 }
 .text-right {
   text-align: right;
+}
+
+div.box {
+  width: 70%;
 }
