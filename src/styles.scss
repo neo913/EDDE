@@ -1,4 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+@import './library';
 
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+  scroll-behavior: smooth;
+}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+span.whitening {
+  color: white;
+}
+.font-900 {
+  font-weight: 900 !important;
+}
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+
+div.box {
+  width: 70%;
+}
