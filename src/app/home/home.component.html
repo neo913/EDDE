@@ -1,29 +1,38 @@
-<nav id="homeNav">
+<nav id="homeNav" *ngIf="getTag() != '' && getTag() != 'home'" >
 	<a href="#edde" id="logo">EDDE</a>
 	<div id="navbar-center">
 		<a [ngClass]="{'active': getTag()=='about'}" href="#about">About</a>
 		<a [ngClass]="{'active': getTag()=='skills'}" href="#skills">Skills</a>
-		<a [ngClass]="{'active': getTag()=='work'}" href="#work">Work</a>
-		<a [ngClass]="{'active': getTag()=='contact'}" href="#contact">Contact</a>
+		<a [ngClass]="{'active': getTag()=='works'}" href="#works">Works</a>
+		<a >Contact</a>
+		<!-- <a [ngClass]="{'active': getTag()=='contact'}" href="#contact">Contact</a> -->
 	</div>
 </nav>
 <div class="homeContainer">
-	<div id="home">
+
+	<!-- home -->
+	<div id="home" class="container">
 		<img src="../../assets/edward.jpg">
 		<div class="home box" [innerHTML]="aboutText"></div>
 		<button mat-raised-button>Contact</button>
 	</div>
-	<div id="about">
+
+	<!-- about -->
+	<div id="about" class="container">
 		<div class="about box" [innerHTML]="aboutText"></div>
 	</div>
-	<div id="skills">
-		<div class="skills box">
 
+	<!-- skills -->
+	<div id="skills" class="container">
+		<div class="skills box">
+			skills
 		</div>
 	</div>
-	<div id="work">
-		<div class="work box">
 
+	<!-- work -->
+	<div id="works" class="container">
+		<div class="work box">
+			work
 		</div>
 	</div>
 </div>

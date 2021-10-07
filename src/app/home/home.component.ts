@@ -1,5 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import { makeStateKey } from '@angular/platform-browser';
+import { AfterViewInit, Component, Host, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { aboutText } from '../../assets/library';
 
@@ -10,12 +9,13 @@ import { aboutText } from '../../assets/library';
 })
 export class HomeComponent implements OnInit {
   
-  currentPosition = window.pageYOffset;
   aboutText = aboutText;
-
+  windowHeight = 0;
+  
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.windowHeight = document.body.clientHeight; // responsive
   }
 
   /* Getting current tag */
@@ -25,77 +25,40 @@ export class HomeComponent implements OnInit {
     return urlArr[1]? urlArr[1]: '';
   }
 
-  /**
-   * 
-
-  // Scroll to specific element
-  scrollTo(direction: string) {
-    console.log(direction);
-    let target = '';
-    if(direction == 'down'){
-      switch (this.getTag()) {
-        case 'home'   : target = "about"; break;
-        case 'about'  : target = "contact"; break;
-        case 'contact': target = "contact"; break;
-        default : target = "about"; break;
-      }
-    } else if(direction == 'up') {
-      switch (this.getTag()) {
-        case 'home'   : target = "home"; break;
-        case 'about'  : target = "home"; break;
-        case 'contact': target = "about"; break;
-        default : target = "home"; break;
-      }
-    } else if(direction == 'cur') {
-      target = this.getTag();
-    }
-
-    // const debouncer = Date.now() + 2000;
-    // if(!this.scrolledTime || this.scrolledTime > debouncer) {
-    //   this.scrolledTime = Date.now();
-    // }
-    // console.log(this.scrolledTime , debouncer, debouncer - this.scrolledTime);
-    // if(this.scrolledTime > debouncer) {
-    //   return ;
-    // }
-    // console.log(1);
-    // this.scrolledTime = Date.now();
-    
-    this.router.navigate(['/Home'], { fragment: target });
-    let el = document.getElementById(target);
-    el?.scrollIntoView({behavior:'smooth'});
-    // this.sleep(1000);
+  scrollInto(target: string) {
+    this.router.navigate(['/Home'], {fragment: target});
+    target = '#' + target;
+    document.querySelector(target)?.scrollIntoView({behavior: 'smooth', block: 'center'});
   }
-
-  sleep(ms: number) {
-    const wakeUpTime = Date.now() + ms;
-    while(Date.now() < wakeUpTime) { }
-  }
-
-  scrolledTime = Date.now();
-  wakeUpTime = Date.now();
 
   @HostListener('window:scroll', ['$event'])
-  scrolled(e:any) {
-    console.log(this.scrolledTime, this.wakeUpTime, this.scrolledTime < this.wakeUpTime)
-    // while(this.scrolledTime < this.wakeUpTime) {
-    //   this.scrolledTime = Date.now();
-    //   this.scrollTo('cur');
-    // }
+  scrollManager(event: Event) {
 
-    let scroll = e.target.scrollingElement.scrollTop;
-    console.log(scroll, this.currentPosition, scroll > this.currentPosition);
-    if (scroll > this.currentPosition) { // scroll down
-      // console.log('down');
-      this.scrollTo('down');
-    } else { // scroll up
-      // console.log('up');
-      this.scrollTo('up');
+    const home = document.querySelector('#home')?.getBoundingClientRect();
+    const about = document.querySelector('#about')?.getBoundingClientRect();
+    const skills = document.querySelector('#skills')?.getBoundingClientRect();
+    const works = document.querySelector('#works')?.getBoundingClientRect();
+    
+    let target = "";
+    let margin = this.windowHeight * 0.4;
+
+    if(home && about && skills && works) {
+
+      if(Math.abs(home.y) < margin && (this.getTag() != "" && this.getTag() != "home")) {
+        target = "home";
+      } else if(Math.abs(about.y) < margin && this.getTag() != "about") {
+        target = "about";
+      } else if(Math.abs(skills.y) < margin && this.getTag() != "skills") {
+        target = "skills";
+      } else if(Math.abs(works.y) < margin && this.getTag() != "works") {
+        target = "works"
+      }
+
+      if(target != "") {
+        this.scrollInto(target);
+      }
+      event.preventDefault();
+      event.stopPropagation();
     }
-    this.currentPosition = scroll;
-
-    this.scrolledTime = Date.now();
-    this.wakeUpTime = this.scrolledTime + 3000;
   }
-  */
 }
