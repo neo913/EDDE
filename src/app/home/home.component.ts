@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
     const works = document.querySelector('#works')?.getBoundingClientRect();
     
     let target = "";
-    let margin = this.windowHeight * 0.6;
+    let margin = this.windowHeight * 0.5;
 
     if(home && about && skills && works) {
 
