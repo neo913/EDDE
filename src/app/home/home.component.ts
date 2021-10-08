@@ -1,4 +1,3 @@
-import { ViewportScroller } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { aboutText } from '../../assets/library';
@@ -7,7 +6,9 @@ interface ModifiedRect {
   id: string,
   height: number,
   width: number,
-  y: number
+  y: number,
+  top: number,
+  bottom: number
 }
 @Component({
   selector: 'app-home',
@@ -23,8 +24,10 @@ export class HomeComponent implements OnInit {
   wakeUptime = 0;
   direction = '';
   lastY = 0;
+  down = 0;
+  up = 0;
 
-  constructor(private router: Router, private viewportScroller: ViewportScroller) {
+  constructor(private router: Router ) {
   }
 
   ngOnInit(): void {
@@ -47,7 +50,9 @@ export class HomeComponent implements OnInit {
         id: containers[i].id,
         height: page.height,
         width: page.width,
-        y: page.y
+        y: page.y,
+        top: page.top,
+        bottom: page.bottom
       };
     }
   }
@@ -77,21 +82,33 @@ export class HomeComponent implements OnInit {
 
   getDirection() {
     let st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
-    st > this.lastY? this.direction = "down": this.direction = "up";
+    st > this.lastY? this.down++ : this.up++ ;
     this.lastY = st <= 0 ? 0 : st; // For Mobile or negative scrolling
-    console.log(this.direction);
+    //console.log(this.direction);
   }
 
   @HostListener('mousewheel', ['$event'])
+  // @HostListener('touchmove', ['$event'])
   wheelManager(event: Event) {
-    
-    this.getDirection();
 
-    if(this.wakeUptime > Date.now()) { 
+    this.getDirection();
+    
+    if((this.down + this.up) > 5) { // logic go figure out where user mean to scroll
+      this.down > this.up? this.direction = "down": this.direction = "up";
+      if(this.wakeUptime > Date.now()) {  // still sleeping
+        event.stopPropagation();
+        // event.preventDefault();
+        return;
+      } else { 
+        this.wakeUptime = Date.now() + 1000;
+        this.scroller(this.direction);
+        this.down = 0;  // down init
+        this.up = 0;    // up init
+      }
+    } else {
+      event.stopPropagation();
+      // event.preventDefault();
       return;
-    } else { 
-      this.wakeUptime = Date.now() + 500;
-      this.scroller(this.direction);
     }
   }
 
