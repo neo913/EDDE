@@ -1,9 +1,12 @@
-<nav id="homeNav" *ngIf="getTag() != '' && getTag() != 'home'" >
-	<a href="#edde" id="logo">EDDE</a>
+<nav id="homeNav">
+	<a id="logo" (click)="scroller('home')">EDDE</a>
 	<div id="navbar-center">
-		<a [ngClass]="{'active': getTag()=='about'}" href="#about">About</a>
+		<a [ngClass]="{'active': getTag()=='about'}" (click)="scroller('about')">About</a>
+		<a [ngClass]="{'active': getTag()=='skills'}" (click)="scroller('skills')">Skills</a>
+		<a [ngClass]="{'active': getTag()=='works'}" (click)="scroller('works')">Works</a>
+		<!-- <a [ngClass]="{'active': getTag()=='about'}" href="#about">About</a>
 		<a [ngClass]="{'active': getTag()=='skills'}" href="#skills">Skills</a>
-		<a [ngClass]="{'active': getTag()=='works'}" href="#works">Works</a>
+		<a [ngClass]="{'active': getTag()=='works'}" href="#works">Works</a> -->
 		<a >Contact</a>
 		<!-- <a [ngClass]="{'active': getTag()=='contact'}" href="#contact">Contact</a> -->
 	</div>
@@ -11,28 +14,39 @@
 <div class="homeContainer">
 
 	<!-- home -->
-	<div id="home" class="container">
+	<div id="home" class="container" hidden="getTag() != '' && getTag() != 'home">
 		<img src="../../assets/edward.jpg">
-		<div class="home box" [innerHTML]="aboutText"></div>
+		<div class="home box">
+			<h1 class="font-900 text-center">Hello, I'm <span class="whitening">ED</span>ward, a <span class="whitening">DE</span>veloper.</h1><br />
+			<h3 class="text-center">As a <span class="whitening">Frontend Developer</span>, I have wide range of programming skills and experiences including <span class="whitening">Angular, React, jQuery,</span> to name but a few.<br /></h3>
+			<h3 class="text-center">I am actively looking for a job in <span class="whitening">Toronto</span>, ON, CA area<br /></h3>
+			<h3 class="text-center">Feel free to take a look at my profile, resume, and projects and 
+			if you're interested, please let me know.<br /></h3>
+		</div>
 		<button mat-raised-button>Contact</button>
 	</div>
 
 	<!-- about -->
-	<div id="about" class="container">
+	<div id="about" class="container" [hidden]="getTag() != 'about'">
 		<div class="about box" [innerHTML]="aboutText"></div>
 	</div>
 
 	<!-- skills -->
-	<div id="skills" class="container">
+	<div id="skills" class="container" [hidden]="getTag() != 'skills'">
 		<div class="skills box">
 			skills
 		</div>
 	</div>
 
-	<!-- work -->
-	<div id="works" class="container">
+	<!-- works -->
+	<div id="works" class="container" [hidden]="getTag() != 'works'">
 		<div class="work box">
 			work
 		</div>
 	</div>
+</div>
+
+<div class="btn-move">
+	<span (click)="scroller('up')" class="material-icons">arrow_upward</span>
+	<span (click)="scroller('down')" class="material-icons">arrow_downward</span>
 </div>
