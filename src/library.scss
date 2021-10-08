@@ -2,7 +2,15 @@ html {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 14px;
 } 
-$color1: #009688;
-$color2: #FFA000;
-$color3: #5677fc;
-$color4: #d34836;
+html, body, p, div, span {
+    word-break: break-word;
+    white-space: normal;
+}
+// $color1: #009688;
+// $color2: #FFA000;
+// $color3: #5677fc;
+// $color4: #d34836;
+$color1: #eeb8b8;
+$color2: #f6b99d;//$color2: #eadb80;
+$color3: #ccdbe2;
+$color4: #c9cbe0;

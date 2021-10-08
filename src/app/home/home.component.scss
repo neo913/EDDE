@@ -27,14 +27,19 @@
 }
 
 .homeContainer {
-	> div {
+	// general
+	> div {	
 		display: flex;
 		height: 100vh;
 		justify-content: center;
-		align-items: center;
-	}
-	& #home {
 		flex-direction: column;
+		align-items: center;
+		div.contents {
+			h1, h3 { text-align: center; }
+		}
+	}
+	// specific
+	& #home {
 		background-color: $color1;
 		img {
 			width: 300px;
@@ -45,22 +50,51 @@
 			width: 70%;
 			margin-top: 4rem;
 		}
+		button {
+			margin-top: 2rem;
+		}
 	}
 	& #about {
 		background-color: $color2;
-		.aboutMe {
-			width: 70%;
+		.history {
+			mat-card {
+				margin: 10px 0px;
+				font-weight: 700;
+				button {
+					line-height: 1.5rem;
+				}
+			}
+			img {
+				width: 20px;
+				padding-right: 10px;
+			}
+			mat-panel-title {
+				min-width: 260px;
+			}
+			.position {
+				justify-content: right;
+			}
+			mat-panel-description {
+				max-width: 150px;
+				justify-content: right;
+			}
+			p {
+				max-height: 200px;
+				overflow: auto;
+			}
 		}
 	}
 	& #skills {
 		background-color: $color3;
-		.contactBox {
-			width: 50%;
+		.skills {
 		}
 	}
 	
 	& #works {
 		background-color: $color4;
+		.works {
+			width: 70%;
+		}
 	}
 }
 

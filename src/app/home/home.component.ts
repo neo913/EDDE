@@ -1,6 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { MatAccordion } from '@angular/material/expansion';
 import { Router } from '@angular/router';
-import { aboutText } from '../../assets/library';
+import * as library  from '../../assets/library'
 
 interface ModifiedRect {
   id: string,
@@ -10,6 +11,13 @@ interface ModifiedRect {
   top: number,
   bottom: number
 }
+interface History {
+  company: string,
+  logoUrl: string,
+  position: string,
+  period: string,
+  description: string
+}
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -17,7 +25,6 @@ interface ModifiedRect {
 })
 export class HomeComponent implements OnInit {
   
-  aboutText = aboutText;
   windowHeight = 0;
   windowWidth = 0;
   pages: ModifiedRect[] = [];
@@ -26,19 +33,29 @@ export class HomeComponent implements OnInit {
   lastY = 0;
   down = 0;
   up = 0;
+  historyText: History[] = [];
+
+  @ViewChild(MatAccordion) accordion: MatAccordion;
 
   constructor(private router: Router ) {
+    this.accordion = new MatAccordion;
   }
 
   ngOnInit(): void {
     this.sizeInit();
     this.pageInit();
+    this.accordianInit();
   }
 
   sizeInit() {
     // responsive
     this.windowHeight = document.body.clientHeight;
     this.windowWidth = document.body.clientWidth;
+  }
+
+  accordianInit() {
+    this.historyText = new Array<History>();
+    this.historyText = library.workHistories;
   }
 
   pageInit() {
@@ -89,10 +106,15 @@ export class HomeComponent implements OnInit {
 
   @HostListener('mousewheel', ['$event'])
   // @HostListener('touchmove', ['$event'])
-  wheelManager(event: Event) {
-
-    this.getDirection();
+  wheelManager(event: WheelEvent) {
+  // wheelManager(event: Event) { // for scroll event
     
+  let targetOn = <HTMLElement>(event.target || event.currentTarget);
+    if(targetOn.id == '') { return; } // stop auto-scroll on other div
+    
+    // this.getDirection(); // for scroll event
+    event.deltaY > 0? this.down++ : this.up++; // for mousewheel event
+
     if((this.down + this.up) > 5) { // logic go figure out where user mean to scroll
       this.down > this.up? this.direction = "down": this.direction = "up";
       if(this.wakeUptime > Date.now()) {  // still sleeping

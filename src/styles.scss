@@ -12,6 +12,9 @@ span.whitening {
 .font-900 {
   font-weight: 900 !important;
 }
+.font-700 {
+  font-weight: 700 !important;
+}
 .text-center {
   text-align: center;
 }
@@ -21,7 +24,12 @@ span.whitening {
 .text-right {
   text-align: right;
 }
-
+.pull-right {
+  float: right;
+}
+.pull-left {
+  float: left;
+}
 div.box {
   width: 70%;
 }
